@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://byxsfe8kq08hl"]
+
+[ext_resource type="Texture2D" uid="uid://derylwr44nbq6" path="res://scenes/Battle_1/Space.svg" id="1_4vddj"]
+[ext_resource type="Texture2D" uid="uid://71822prm1kjk" path="res://scenes/Circle.svg" id="1_7kmsq"]
+[ext_resource type="Script" path="res://scenes/Battle_1/space.gd" id="2_a5gnu"]
+[ext_resource type="Script" path="res://scenes/circle.gd" id="2_ssew2"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Space" type="Sprite2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("1_4vddj")
+region_enabled = true
+region_rect = Rect2(0, 0, 2000, 3240)
+script = ExtResource("2_a5gnu")
+
+[node name="Circle" type="Sprite2D" parent="."]
+texture = ExtResource("1_7kmsq")
+script = ExtResource("2_ssew2")
+top_limit = -490
+left_limit = -910
+bottom_limit = 490
+right_limit = 910
+moving_up_button = 87
+moving_down_button = 83
+moving_left_button = 65
+moving_right_button = 68
+moving_up_speed = 600
+moving_down_speed = 600
+moving_left_speed = 600
+moving_right_speed = 600
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = -960
+limit_top = -540
+limit_right = 960
+limit_bottom = 540

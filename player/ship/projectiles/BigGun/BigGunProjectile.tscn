@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://br2oq45flwxem"]
+
+[ext_resource type="PackedScene" uid="uid://cmqj3usjy1tns" path="res://player/ship/projectiles/BigGun/Main ship weapon - Projectile - Big Space Gun.aseprite" id="1_qxdys"]
+[ext_resource type="Script" path="res://player/ship/projectiles/BigGun/BigGunProjectile.gd" id="1_vpd2e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bahfv"]
+radius = 7.0
+
+[node name="BigGunProjectile" type="Area2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_vpd2e")
+
+[node name="Main ship weapon - Projectile - Big Space Gun" parent="." instance=ExtResource("1_qxdys")]
+texture_filter = 1
+scale = Vector2(2, 2)
+autoplay = "default"
+frame = 1
+frame_progress = 0.338783
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_bahfv")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

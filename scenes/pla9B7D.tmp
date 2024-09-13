@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://bebxu8thuxmtj"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_566qo"]
+[ext_resource type="Script" path="res://player/ship.gd" id="1_vdggo"]
+[ext_resource type="Texture2D" uid="uid://dvs3lqha34ory" path="res://player/ship/Hull/Main Ship - Base - Full health.aseprite" id="3_40c2e"]
+[ext_resource type="Texture2D" uid="uid://cnem84bhccfsu" path="res://player/ship/Hull/Main Ship - Base - Slight damage.aseprite" id="4_omjaa"]
+[ext_resource type="Texture2D" uid="uid://buomvc4rkc4df" path="res://player/ship/Hull/Main Ship - Base - Damaged.aseprite" id="5_nxnbd"]
+[ext_resource type="Texture2D" uid="uid://d2fkx67j5oxl6" path="res://player/ship/Hull/Main Ship - Base - Very damaged.aseprite" id="6_vloi6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hxx8m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_40c2e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_omjaa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_nxnbd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_vloi6")
+}],
+"loop": true,
+"name": &"Health",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_566qo")
+
+[node name="Ship" type="Area2D" parent="."]
+scale = Vector2(2, 2)
+script = ExtResource("1_vdggo")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ship"]
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+
+[node name="Sprite" type="Node2D" parent="Ship"]
+rotation = 1.5708
+
+[node name="Hull" type="AnimatedSprite2D" parent="Ship/Sprite"]
+sprite_frames = SubResource("SpriteFrames_hxx8m")
+animation = &"Health"
+
+[connection signal="body_entered" from="Ship" to="Ship" method="_on_body_entered"]

@@ -1,0 +1,103 @@
+[gd_scene load_steps=12 format=3 uid="uid://bu02sl87p75td"]
+
+[ext_resource type="Script" path="res://player/Player.gd" id="1_ykx1x"]
+[ext_resource type="PackedScene" uid="uid://cw2fjv1x1xm1n" path="res://player/ship/Weapons/Main Ship - Weapons - Big Space Gun.aseprite" id="2_2khyo"]
+[ext_resource type="PackedScene" uid="uid://brgh0pkc41gcx" path="res://player/ship/Weapons/Main Ship - Weapons - Rockets.aseprite" id="3_ctqpq"]
+[ext_resource type="PackedScene" uid="uid://dad2rb88ifrdc" path="res://player/ship/Weapons/Main Ship - Weapons - Auto Cannon.aseprite" id="4_2203k"]
+[ext_resource type="PackedScene" uid="uid://bt2euli0r0e51" path="res://player/ship/engine/Main Ship - Engines - Base Engine - Spritesheet.aseprite" id="5_w233s"]
+[ext_resource type="Texture2D" uid="uid://cjvec54d6dvn2" path="res://player/ship/engine/Main Ship - Engines - Base Engine.png" id="6_34olr"]
+[ext_resource type="Texture2D" uid="uid://dvs3lqha34ory" path="res://player/ship/Hull/Main Ship - Base - Full health.aseprite" id="7_tdmky"]
+[ext_resource type="Texture2D" uid="uid://cnem84bhccfsu" path="res://player/ship/Hull/Main Ship - Base - Slight damage.aseprite" id="8_wlj0q"]
+[ext_resource type="Texture2D" uid="uid://buomvc4rkc4df" path="res://player/ship/Hull/Main Ship - Base - Damaged.aseprite" id="9_j7mxn"]
+[ext_resource type="Texture2D" uid="uid://d2fkx67j5oxl6" path="res://player/ship/Hull/Main Ship - Base - Very damaged.aseprite" id="10_nua33"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1clqp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_tdmky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_wlj0q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_j7mxn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_nua33")
+}],
+"loop": true,
+"name": &"Health",
+"speed": 5.0
+}]
+
+[node name="Player" type="RigidBody2D"]
+texture_filter = 1
+script = ExtResource("1_ykx1x")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(-11, -15, -6, -15, 4, -5, 7, -5, 7, -4, 9, -4, 9, -3, 11, -3, 11, -2, 12, -2, 12, -1, 13, -1, 13, 1, 12, 1, 12, 2, 11, 2, 11, 3, 9, 3, 9, 4, 7, 4, 7, 5, 4, 5, -6, 15, -11, 15, -11, 13, -10, 11, -10, 3, -13, 3, -13, -3, -10, -3, -10, -11, -11, -13)
+
+[node name="Sprite" type="Node2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+
+[node name="BigSpaceGun" parent="Sprite" instance=ExtResource("2_2khyo")]
+visible = false
+speed_scale = 2.0
+
+[node name="BigGunProjectileSpawnPoint" type="Marker2D" parent="Sprite/BigSpaceGun"]
+position = Vector2(-1.81e-05, -5)
+rotation = -1.5708
+scale = Vector2(0.5, 0.5)
+
+[node name="Rockets" parent="Sprite" instance=ExtResource("3_ctqpq")]
+visible = false
+speed_scale = 2.0
+
+[node name="RocketSpawnPoint1" type="Marker2D" parent="Sprite/Rockets"]
+position = Vector2(-6, -8)
+rotation = -1.5708
+
+[node name="RocketSpawnPoint2" type="Marker2D" parent="Sprite/Rockets"]
+position = Vector2(7, -8)
+rotation = -1.5708
+
+[node name="RocketSpawnPoint3" type="Marker2D" parent="Sprite/Rockets"]
+position = Vector2(-10, -6)
+rotation = -1.5708
+
+[node name="RocketSpawnPoint4" type="Marker2D" parent="Sprite/Rockets"]
+position = Vector2(11, -6)
+rotation = -1.5708
+
+[node name="RocketSpawnPoint5" type="Marker2D" parent="Sprite/Rockets"]
+position = Vector2(-14, -4)
+rotation = -1.5708
+
+[node name="RocketSpawnPoint6" type="Marker2D" parent="Sprite/Rockets"]
+position = Vector2(15, -4)
+rotation = -1.5708
+
+[node name="AutoCannon" parent="Sprite" instance=ExtResource("4_2203k")]
+visible = false
+speed_scale = 2.0
+
+[node name="CannonSpawnPoint1" type="Marker2D" parent="Sprite/AutoCannon"]
+position = Vector2(-9.00003, -8.99997)
+rotation = -1.5708
+
+[node name="CannonSpawnPoint2" type="Marker2D" parent="Sprite/AutoCannon"]
+position = Vector2(8.99997, -9.00003)
+rotation = -1.5708
+
+[node name="EngineEffect" parent="Sprite" instance=ExtResource("5_w233s")]
+autoplay = "Idle"
+
+[node name="Engine" type="Sprite2D" parent="Sprite"]
+texture = ExtResource("6_34olr")
+
+[node name="Hull" type="AnimatedSprite2D" parent="Sprite"]
+sprite_frames = SubResource("SpriteFrames_1clqp")
+animation = &"Health"

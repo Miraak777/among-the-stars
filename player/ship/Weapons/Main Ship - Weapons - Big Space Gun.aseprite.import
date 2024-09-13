@@ -1,0 +1,25 @@
+[remap]
+
+importer="Aseprite AnimatedSprite2D Import"
+type="PackedScene"
+uid="uid://cw2fjv1x1xm1n"
+path="res://.godot/imported/Main Ship - Weapons - Big Space Gun.aseprite-023e04c896308a146ec7aa39fd86e785.scn"
+
+[deps]
+
+source_file="res://player/ship/Weapons/Main Ship - Weapons - Big Space Gun.aseprite"
+dest_files=["res://.godot/imported/Main Ship - Weapons - Big Space Gun.aseprite-023e04c896308a146ec7aa39fd86e785.scn"]
+
+[params]
+
+spritesheet/layout=0
+spritesheet/fixed_rows_count=1
+spritesheet/fixed_columns_count=1
+spritesheet/border_type=0
+spritesheet/trim=false
+spritesheet/ignore_empty=false
+spritesheet/merge_duplicates=false
+animation/default/name="default"
+animation/default/direction=0
+animation/default/repeat_count=0
+animation/autoplay=""
