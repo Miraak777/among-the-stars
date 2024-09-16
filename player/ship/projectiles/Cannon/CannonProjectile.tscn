@@ -1,23 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://ugjvvkhc4qst"]
+[gd_scene load_steps=6 format=3 uid="uid://ugjvvkhc4qst"]
 
 [ext_resource type="Script" path="res://player/ship/projectiles/Cannon/CannonProjectile.gd" id="1_gdrh5"]
 [ext_resource type="PackedScene" uid="uid://jwl26f85sebn" path="res://player/ship/projectiles/Cannon/Main ship weapon - Projectile - Auto cannon bullet.aseprite" id="1_xv8yr"]
+[ext_resource type="Texture2D" uid="uid://b0slc357ctjys" path="res://player/ship/projectiles/Cannon/CannonProjectileExplosion1.png" id="3_nvn52"]
+[ext_resource type="Texture2D" uid="uid://dispuo2gqhsic" path="res://player/ship/projectiles/Cannon/CannonProjectileExplosion2.png" id="4_4vkgc"]
 
-[node name="CannonProjectile" type="Area2D"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_fm6ye"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_nvn52")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4vkgc")
+}],
+"loop": false,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="CannonProjectile" type="RigidBody2D"]
 texture_filter = 1
-collision_layer = 2
-collision_mask = 0
+collision_layer = 0
+collision_mask = 2
+gravity_scale = 0.0
 script = ExtResource("1_gdrh5")
-
-[node name="Main ship weapon - Projectile - Auto cannon bullet" parent="." instance=ExtResource("1_xv8yr")]
-rotation = 1.5708
-scale = Vector2(0.5, 0.5)
-autoplay = "default"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 scale = Vector2(0.5, 0.5)
-polygon = PackedVector2Array(5, 0, 2, 3, -4, 3, -4, -3, 2, -3)
+polygon = PackedVector2Array(16, 0, 8, 8, -8, 8, -8, -8, 8, -8)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Sprite" parent="." instance=ExtResource("1_xv8yr")]
+rotation = 1.5708
+autoplay = "default"
+
+[node name="Explosion" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(1, -1)
+sprite_frames = SubResource("SpriteFrames_fm6ye")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

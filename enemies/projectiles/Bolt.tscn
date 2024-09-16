@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvha3kdct4ju5"]
+
+[ext_resource type="Script" path="res://enemies/projectiles/Bolt.gd" id="1_s76kc"]
+[ext_resource type="PackedScene" uid="uid://cnwy1us5ewdgw" path="res://enemies/projectiles/Nairan - Bolt.aseprite" id="1_sorok"]
+
+[node name="Bolt" type="RigidBody2D"]
+texture_filter = 1
+collision_layer = 0
+script = ExtResource("1_s76kc")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -5, 3, 0, -3, 0)
+
+[node name="Sprite" parent="." instance=ExtResource("1_sorok")]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

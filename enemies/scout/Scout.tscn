@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpni1uveogk64"]
+
+[ext_resource type="Script" path="res://enemies/scout/Scout.gd" id="1_25uqp"]
+[ext_resource type="PackedScene" uid="uid://bjutbaw3wbt6h" path="res://enemies/scout/Nairan - Scout - Engine.aseprite" id="1_87l2m"]
+[ext_resource type="PackedScene" uid="uid://dvha3kdct4ju5" path="res://enemies/projectiles/Bolt.tscn" id="2_86jp8"]
+[ext_resource type="PackedScene" uid="uid://dpojp0luf3qef" path="res://enemies/scout/Nairan - Scout -  Destruction.aseprite" id="2_dblww"]
+[ext_resource type="PackedScene" uid="uid://dd4dbu1cwdi0d" path="res://enemies/scout/Nairan - Scout - Weapons.aseprite" id="3_xc1sp"]
+
+[node name="Scout" type="RigidBody2D"]
+texture_filter = 1
+collision_layer = 2
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_25uqp")
+projectile = ExtResource("2_86jp8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(16, 12, 16, -12, 10, -12, 4, -18, 0, -18, -12, -24, -20, -24, -20, -20, -14, -12, -26, -12, -26, 12, -14, 12, -20, 20, -20, 24, -11, 24, 0, 18, 4, 18, 10, 12)
+
+[node name="Sprite" type="Node2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+
+[node name="Hull" parent="Sprite" instance=ExtResource("1_87l2m")]
+autoplay = "default"
+
+[node name="Destruction" parent="Sprite" instance=ExtResource("2_dblww")]
+visible = false
+frame = 8
+frame_progress = 0.353453
+
+[node name="Weapon" parent="Sprite" instance=ExtResource("3_xc1sp")]
+
+[node name="WeaponProjectileSpawnPoint1" type="Marker2D" parent="Sprite/Weapon"]
+position = Vector2(9.5, -1)
+
+[node name="WeaponProjectileSpawnPoint2" type="Marker2D" parent="Sprite/Weapon"]
+position = Vector2(-9.5, -1)

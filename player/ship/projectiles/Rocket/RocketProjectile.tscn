@@ -1,24 +1,52 @@
-[gd_scene load_steps=3 format=3 uid="uid://vcf08ckqemax"]
+[gd_scene load_steps=7 format=3 uid="uid://vcf08ckqemax"]
 
 [ext_resource type="Script" path="res://player/ship/projectiles/Rocket/RocketProjectile.gd" id="1_uyynb"]
 [ext_resource type="PackedScene" uid="uid://ba3sllygmgsxx" path="res://player/ship/projectiles/Rocket/Main ship weapon - Projectile - Rocket.aseprite" id="2_ufahe"]
+[ext_resource type="Texture2D" uid="uid://bra10sgfcm4mk" path="res://player/ship/projectiles/Rocket/RocketProjectileExplosion1.png" id="3_mh4cf"]
+[ext_resource type="Texture2D" uid="uid://c3guxbkrf8iwr" path="res://player/ship/projectiles/Rocket/RocketProjectileExplosion2.png" id="4_6ipk1"]
+[ext_resource type="Texture2D" uid="uid://bqnx6v8hyqxen" path="res://player/ship/projectiles/Rocket/RocketProjectileExplosion3.png" id="5_u3s0p"]
 
-[node name="RocketProjectile" type="Area2D"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_2mdhn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_mh4cf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_6ipk1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_u3s0p")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="RocketProjectile" type="RigidBody2D"]
 texture_filter = 1
-collision_layer = 2
-collision_mask = 0
+collision_layer = 0
+collision_mask = 2
+gravity_scale = 0.0
 script = ExtResource("1_uyynb")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(4, -1)
-polygon = PackedVector2Array(0, 1, 2, 1, 2, 0, 0, 0, 0, -1, -6, -1, -6, -2, -10, -2, -10, 3, -6, 3, -6, 2, 0, 2)
+polygon = PackedVector2Array(4, 1, 8, 1, 8, -1, 4, -1, 4, -3, -8, -3, -8, -5, -16, -5, -16, 5, -8, 5, -8, 3, 4, 3)
 
-[node name="Main ship weapon - Projectile - Rocket" parent="." instance=ExtResource("2_ufahe")]
+[node name="Sprite" parent="." instance=ExtResource("2_ufahe")]
 rotation = 1.5708
+scale = Vector2(2, 2)
 autoplay = "default"
 frame = 1
 frame_progress = 0.586705
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Explosion" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-2, -1)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_2mdhn")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
